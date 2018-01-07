@@ -4,19 +4,19 @@ module BinarySearchTree where
 data Tree a = Nil | Node (Tree a) a (Tree a) deriving Show
 
 insert :: Tree Int -> Int -> Tree Int
-insert Nil number = Node Nil number Nil
-insert (Node lt val rt) number
-  | number == val = Node lt val lt
-  | number < val = Node (insert lt number) val rt
-  | number > val = Node lt val (insert rt number)
+insert Nil x = Node Nil x Nil
+insert (Node lt n rt) x
+  | x == n = Node lt n lt
+  | x < n = Node (insert lt x) n rt
+  | x > n = Node lt n (insert rt x)
 
 -- search returns a boolean indicating whether the number exists in the BST.
 search :: Tree Int -> Int -> Bool
 search Nil _ = False
-search (Node lt val rt) number
-  | number == val = True
-  | number < val = search lt number
-  | number > val = search rt number
+search (Node lt n rt) x
+  | x == n = True
+  | x < n = search lt x
+  | x > n = search rt x
 
 -- creates a new BST from a list of integers
 bstFromList :: [Int] -> Tree Int
@@ -25,4 +25,14 @@ bstFromList lst = foldl insert Nil lst
 -- depth of the BST
 depth :: Tree Int -> Int
 depth Nil = 0
-depth (Node lt val rt) = 1 + max (depth lt) (depth rt)
+depth (Node lt n rt) = 1 + max (depth lt) (depth rt)
+
+-- delete a number x from the BST and return the tree. The delete is idempotent without checks.
+delete :: Tree Int -> Int -> Tree Int
+delete Nil _ = Nil
+delete (Node Nil n Nil) x
+  | x == n = Nil
+  | otherwise = Node Nil n Nil
+
+-- delete (Node lt n rt) x
+--  | x == n = Node
