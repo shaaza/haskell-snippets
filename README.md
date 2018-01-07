@@ -1,6 +1,6 @@
 # Haskell Learning Snippets
 ## Index
-- [Binary Search Tree](./binary-search-tree/README.md#binary-search-tree)
+- [Binary Search Tree](./binary-search-tree#binary-search-tree)
 - [Miscellaneous Snippets](./misc-snippets/README.md)
   - Fibonacci, List Functions, etc.
 
