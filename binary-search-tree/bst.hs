@@ -18,6 +18,20 @@ search (Node lt n rt) x
   | x < n = search lt x
   | x > n = search rt x
 
+-- smallest returns the smallest value in the BST
+smallest :: Tree Int -> Int
+smallest Nil = 0
+smallest (Node Nil n Nil) = n
+smallest (Node Nil n _) = n
+smallest (Node lt n rt) = smallest lt
+
+-- largest
+largest :: Tree Int -> Int
+largest Nil = 0
+largest (Node Nil n Nil) = n
+largest (Node _ n Nil) = n
+largest (Node lt n rt) = largest rt
+
 -- creates a new BST from a list of integers
 bstFromList :: [Int] -> Tree Int
 bstFromList lst = foldl insert Nil lst
