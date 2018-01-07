@@ -52,6 +52,3 @@ delete (Node lt n rt) x
   | x < n = Node (delete lt x) n rt
   | x > n = Node lt n (delete rt x)
   | x == n = Node lt (smallest rt) (delete rt (smallest rt))
-
--- delete (Node lt n rt) x
---  | x == n = Node
