@@ -1,5 +1,5 @@
 module BinarySearchTree where
--- A self-balancing integer binary search tree that doesn't allow duplicates (this only unique node values).
+-- An integer binary search tree that doesn't allow duplicates (this only unique node values).
 
 data Tree a = Nil | Node (Tree a) a (Tree a) deriving Show
 
