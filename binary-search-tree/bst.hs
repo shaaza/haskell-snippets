@@ -3,12 +3,12 @@ module BinarySearchTree where
 
 data Tree a = Nil | Node (Tree a) a (Tree a) deriving Show
 
-insert :: Tree Int -> Int -> Tree Int
-insert Nil number = Node Nil number Nil
-insert (Node lt val rt) number
+insert :: Int -> Tree Int -> Tree Int
+insert number Nil = Node Nil number Nil
+insert number (Node lt val rt)
   | number == val = Node lt val lt
-  | number < val = Node (insert lt number) val rt
-  | number > val = Node lt val (insert rt number)
+  | number < val = Node (insert number lt) val rt
+  | number > val = Node lt val (insert number rt)
 
 -- search returns a boolean indicating whether the number exists in the tree.
 search :: Tree Int -> Int -> Bool
@@ -17,3 +17,7 @@ search (Node lt val rt) number
   | number == val = True
   | number < val = search lt number
   | number > val = search rt number
+
+-- creates a new Btree from a list/Foldable
+bstFromList :: [Int] -> Tree Int
+bstFromList lst = foldr insert Nil lst
