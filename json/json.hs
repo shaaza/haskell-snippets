@@ -1,45 +1,48 @@
 module PrintJSON where
 
 
-data Object = NewObject String Value Object | EmptyObject deriving (Show)
-data Array = ArrayElem Value Array | EmptyArray deriving (Show)
+data KeyValuePair = KeyVal String Value KeyValuePair | EmptyKeyVal deriving (Show)
+data ArrayList = Element Value ArrayList | EmptyArrayList deriving (Show)
 
-data Value = JObject Object
-           | JArray Array
-           | JString String
-           | JInt Int
-           | JTrue
-           | JFalse
-           | JNull deriving (Show)
+data Value = Object KeyValuePair
+           | Array ArrayList
+           | S String
+           | I Int
+           | B Bool
+           | Null deriving (Show)
 
 class Serializable a where
   toString :: a -> String
 
-instance Serializable Object where
-  toString (NewObject str val EmptyObject) = (show str) ++ ": " ++ (toString val)
-  toString (NewObject str val obj) = (show str) ++ ": " ++ (toString val) ++ ", \n    " ++ (toString obj)
+instance Serializable KeyValuePair where
+  toString (KeyVal str val EmptyKeyVal) = (show str) ++ ": " ++ (toString val)
+  toString (KeyVal str val obj) = (show str) ++ ": " ++ (toString val) ++ ", \n    " ++ (toString obj)
 
-instance Serializable Array where
-  toString (ArrayElem x EmptyArray) = toString x
-  toString (ArrayElem x arr) = toString x ++ ", \n  " ++ toString arr
+instance Serializable ArrayList where
+  toString (Element x EmptyArrayList) = toString x
+  toString (Element x arr) = toString x ++ ", \n  " ++ toString arr
 
 instance Serializable Value where
-  toString JTrue = "true"
-  toString JFalse = "false"
-  toString JNull = "null"
-  toString (JInt x) = show x
-  toString (JString x) = "" ++ show x ++ "\""
-  toString (JObject EmptyObject) = ""
-  toString (JObject obj) = "{ " ++ toString obj ++ " }"
-  toString (JArray arr) = "[ " ++ toString arr ++ " ]"
+  toString (B True) = "true"
+  toString (B False) = "false"
+  toString Null = "null"
+  toString (I int) = show int
+  toString (S string) = "" ++ show string ++ "\""
+  toString (Object EmptyKeyVal) = ""
+  toString (Object obj) = "{ " ++ toString obj ++ " }"
+  toString (Array arr) = "[ " ++ toString arr ++ " ]"
 
 
 serialize = putStr (toString
-                    (JArray
-                     (ArrayElem (JObject
-                                 (NewObject "asd" JTrue
-                                  (NewObject "bsd" JNull
-                                   EmptyObject)))
-                       (ArrayElem JTrue
-                        (ArrayElem (JInt 3)
-                         EmptyArray)))))
+                    (Array
+                     (Element (Object
+                                 (KeyVal "young?" (B True)
+                                 (KeyVal "name" (S "Willy Wonka")
+                                  EmptyKeyVal)))
+                     (Element (B False)
+                     (Element (I 3)
+                     (Element (Object
+                                 (KeyVal "young?" (B False)
+                                 (KeyVal "name" Null
+                                  EmptyKeyVal)))
+                               EmptyArrayList))))))
