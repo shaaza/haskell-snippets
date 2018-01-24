@@ -2,6 +2,7 @@
 ## Index
 - [Binary Search Tree](./binary-search-tree#binary-search-tree)
 - [JSON Serializer](./json)
+- [Sudoku Solver](./sudoku)
 - [Miscellaneous Snippets](./misc-snippets/README.md)
   - Fibonacci, List Functions, etc.
 
