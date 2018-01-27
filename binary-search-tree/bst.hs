@@ -1,6 +1,9 @@
 module BinarySearchTree where
 -- An integer binary search tree that doesn't allow duplicates (this only unique node values).
 
+import Data.List.Split (linesBy)
+import Data.List (intercalate)
+
 data Tree a = Nil | Node (Tree a) a (Tree a) deriving Show
 
 insert :: Tree Int -> Int -> Tree Int
@@ -52,3 +55,15 @@ delete (Node lt n rt) x
   | x < n = Node (delete lt x) n rt
   | x > n = Node lt n (delete rt x)
   | x == n = Node lt (smallest rt) (delete rt (smallest rt))
+
+pprint :: Tree Int -> String
+pprint Nil = "Nil\n\n"
+pprint tree@(Node l i r) = show i ++
+                           "\n" ++
+                           "|" ++
+                           "\n" ++
+                           "--" ++
+                           intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--L " ++ (pprint l)))) ++
+                           concat ((take . depth $ tree) (repeat "|\n")) ++
+                           "--" ++
+                           intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--R " ++ (pprint r))))
