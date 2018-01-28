@@ -47,7 +47,11 @@ Note that we have only 4 cases for the rotations instead of the 8 usual cases, s
 
 The balanced nature of the red black tree is evident from comparing how far to the right a pretty-printed representation of the normal BST and the red black tree extend.
 ### Red Black Tree
-
+Entering:
+```
+putStr $ pprint $ bstFromList [1..10]
+```
+returns with
 ```
 4
 |
@@ -56,70 +60,94 @@ The balanced nature of the red black tree is evident from comparing how far to t
 | --| --L 1
 | | |
 | | --| --L Nil
-| | | --| --R Nil
 | | | |
+| | --| --R Nil
+| | | |
+| |
 | --| --R 3
 | | |
 | | --| --L Nil
-| | | --| --R Nil
 | | | |
+| | --| --R Nil
+| | | |
+|
 |
 --| --R 6
 | |
 | --| --L 5
 | | |
 | | --| --L Nil
-| | | --| --R Nil
 | | | |
+| | --| --R Nil
+| | | |
+| |
 | --| --R 8
 | | |
 | | --| --L 7
 | | | |
 | | | --| --L Nil
-| | | | --| --R Nil
 | | | | |
+| | | --| --R Nil
+| | | | |
+| | |
 | | --| --R 9
 | | | |
 | | | --| --L Nil
-| | | | --| --R 10
+| | | | |
+| | | --| --R 10
 | | | | |
 | | | | --| --L Nil
-| | | | | --| --R Nil
+| | | | | |
+| | | | --| --R Nil
 | | | | |
 ```
 ### Normal BST
-
+Entering:
+```
+putStr $ pprint $ bstFromList [1..10]
+```
+returns with:
 ```
 1
 |
 --| --L Nil
-| --| --R 2
+| |
+--| --R 2
 | |
 | --| --L Nil
-| | --| --R 3
+| | |
+| --| --R 3
 | | |
 | | --| --L Nil
-| | | --| --R 4
+| | | |
+| | --| --R 4
 | | | |
 | | | --| --L Nil
-| | | | --| --R 5
+| | | | |
+| | | --| --R 5
 | | | | |
 | | | | --| --L Nil
-| | | | | --| --R 6
+| | | | | |
+| | | | --| --R 6
 | | | | | |
 | | | | | --| --L Nil
-| | | | | | --| --R 7
+| | | | | | |
+| | | | | --| --R 7
 | | | | | | |
 | | | | | | --| --L Nil
-| | | | | | | --| --R 8
+| | | | | | | |
+| | | | | | --| --R 8
 | | | | | | | |
 | | | | | | | --| --L Nil
-| | | | | | | | --| --R 9
+| | | | | | | | |
+| | | | | | | --| --R 9
 | | | | | | | | |
 | | | | | | | | --| --L Nil
-| | | | | | | | | --| --R 10
+| | | | | | | | | |
+| | | | | | | | --| --R 10
 | | | | | | | | | |
 | | | | | | | | | --| --L Nil
-| | | | | | | | | | --| --R Nil
+| | | | | | | | | | |
+| | | | | | | | | --| --R Nil
 | | | | | | | | | |
 ```

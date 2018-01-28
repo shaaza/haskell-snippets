@@ -76,11 +76,11 @@ delete (Node c lt n rt) x
 pprint :: Tree Int -> String
 pprint Nil = "Nil\n\n"
 pprint (Node c l i r) = show i ++
-                           "\n" ++
-                           "|" ++
-                           "\n" ++
-                           "--" ++
-                           intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--L " ++ (pprint l)))) ++
-                           concat ((take . depth $ l) (repeat "|\n")) ++
-                           "--" ++
-                           intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--R " ++ (pprint r))))
+                        "\n" ++
+                        "|" ++
+                        "\n" ++
+                        "--" ++
+                        intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--L " ++ (pprint l)))) ++
+                        concat ((take $ (+) (depth l) 1) (repeat "|\n")) ++
+                        "--" ++
+                        intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--R " ++ (pprint r))))

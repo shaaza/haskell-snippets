@@ -58,12 +58,12 @@ delete (Node lt n rt) x
 
 pprint :: Tree Int -> String
 pprint Nil = "Nil\n\n"
-pprint (Node l i r) = show i ++
+pprint tree@(Node l i r) = show i ++
                            "\n" ++
                            "|" ++
                            "\n" ++
                            "--" ++
                            intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--L " ++ (pprint l)))) ++
-                           concat ((take . depth $ l) (repeat "|\n")) ++
+                           concat ((take $ (+) (depth l) 1) (repeat "|\n")) ++
                            "--" ++
                            intercalate "\n" (map ("| " ++) (linesBy (== '\n') ("--R " ++ (pprint r))))
